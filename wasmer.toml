@@ -24,6 +24,7 @@ runner = "https://webc.org/runner/wasi"
 
   [command.annotations.wasi]
   env = [
-      "FLASK_APP=app:create_app",
-      "FLASK_ENV=production"
+      "FLASK_APP=app:app",
+      "FLASK_ENV=production",
+      "PYTHONPATH=/src"
   ]
