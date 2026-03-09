@@ -39,8 +39,16 @@ def create_app():
     return app
 
 # --< Instantiate the app globally for Wasmer WSGI/ASGI >--
-app = create_app()
+wsgi_app = create_app()
+
+try:
+    from asgiref.wsgi import WsgiToAsgi
+    # --< Expose ASGI app for Wasmer edge deployment >--
+    app = WsgiToAsgi(wsgi_app)
+except ImportError:
+    # --< Fallback if asgiref is not installed locally >--
+    app = wsgi_app
 
 if __name__ == '__main__':
-    # --< Run the development server >--
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # --< Run the development server locally using WSGI >--
+    wsgi_app.run(debug=True, host='0.0.0.0', port=5000)
