@@ -1,0 +1,4 @@
+kind: wasmer.io/App.v0
+name: freshness-guard
+description: A manual food waste reduction app. No AI. No predictions. Just fresh food.
+package: mehrub/freshness-guard

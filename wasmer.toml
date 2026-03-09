@@ -1,0 +1,29 @@
+[package]
+name = "mehrub/freshness-guard"
+version = "0.1.0"
+description = "A manual food waste reduction app. No AI. No predictions. Just fresh food."
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+"wasmer/python-web-server" = "^1.1.1"
+
+[fs]
+"src" = "."
+
+[capabilities]
+networking = true
+
+[interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "run"
+module = "wasmer/python-web-server:flask"
+runner = "https://webc.org/runner/wasi"
+
+  [command.annotations.wasi]
+  env = [
+      "FLASK_APP=app:create_app",
+      "FLASK_ENV=production"
+  ]
